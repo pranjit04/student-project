@@ -1,0 +1,194 @@
+ <!DOCTYPE html>
+ <head>
+
+ 	<title>user to write info</title>
+ 	<link rel="stylesheet" type="text/css" href="css/style.css">
+ </head>
+ <body>
+ 	<header>
+ 		<div class="main";> <!--class nu-->
+ 			<div class="logo">
+ 				<img src="logo2.png">
+ 			</div>
+ 			<ul>
+ 				<li ><a href="index.html">Home</a></li> <!-- jate blg page k link nkore # -->
+ 				<li class="active"><a href="#">Create</a></li>
+ 				<li><a href="tableedit.html">View</a></li>
+ 			</ul>
+ 		</div>
+ 	</header>
+ 	<div class="regform">
+
+ 	<h1> STUDENT REGISTRATION FORM</h1>
+
+ 	<div id="regform">
+ 		<form onsubmit="createOnSumbmit()">
+ 			<div>
+ 				<br>
+ 				<label for="first-name">First Name:</label><br>
+ 				<input id="fn" class="name left-margin" type="text" name="fist-name" placeholder="Enter your first name" required><br><br>
+
+ 				<label for="middle-name">Middle Name:</label><br>
+ 				<input id="mn" class="name left-margin" type="text" name="middle-name" placeholder="Enter your middle name"><br><br>
+
+ 				<label for="last-name">Last Name:</label><br>
+ 				<input id="ln" class="name left-margin" type="text" name="last-name" placeholder="Enter your last name" required>
+ 			</div>
+ 			<br>
+ 			<div>
+ 				
+ 				<label for="gender">Male</label>
+ 				<input id="gender" type="radio" name="gender" value="male">
+ 				<label for="gender">Female</label>
+ 				<input id="gender" type="radio" name="gender" value="female">
+ 				<label for="gender">Other</label>
+ 				<input id="gender" type="radio" name="gender" value="other">
+ 			</div>
+ 			<br>
+ 			<div>
+ 				<label for="rollno">Roll No:</label>
+ 				<input id="roll" class ="number" type="number" name="rollno" placeholder="eg.123" required>
+ 				<label for="prn">PRN:</label>
+ 				<input id="prn" class="number" type="number" name="prn" placeholder="eg.12345" required>
+ 			</div>
+ 			<br>
+ 			<div>
+ 				<label for="email">Email:</label><br>
+ 				<input id="em" class ="name left-margin" type="name" name="email" placeholder="abc@email.com"><br>
+ 			</div>
+ 			<br>
+ 			<div>
+ 				<label for="dept">Department:</label>
+ 				<select id="dept" class="desem"  name="dept">
+ 					<option value="0">select</option>
+ 					<option value="Informaton Technology">Informaton Technology</option>
+ 					<option value="Electronics and Telecommunication">Electronics and Telecommunication</option>
+ 					<option value="Electronics">Electronics</option>
+ 					<option value="Electrical">Electrical</option>
+ 					<option value="Mechanical">Mechanical</option>
+ 					<option value="Civil">Civil</option>
+ 					<option value="Chemical">Chemical</option>
+ 					<option value="Computer Science">Computer Science</option>
+ 				</select>
+ 				<br>
+ 				<br>
+ 				<label for="sem">Semister:</label>
+ 				<select id="sem" class="desem"  name="sem">
+ 					<option value="0">select</option>
+ 					<option value="I">I</option>
+ 					<option value="II">II</option>
+ 					<option value="III">III</option>
+ 					<option value="IV">IV</option>
+ 					<option value="V">V</option>
+ 					<option value="VI">VI</option>
+ 					<option value="VII">VII</option>
+ 					<option value="VIII">VIII</option>
+ 				</select>
+ 			</div>
+ 			<br>
+ 			<div>
+ 				<button id="submit" type="submit" 
+ 				>Submit</button>
+ 			</div>	 
+ 		</form>
+ 	</div>
+ </div>
+
+ </body>
+ <script>
+ 	var queryString = window.location.search;
+ 	var urlParams = new URLSearchParams(queryString);
+ 	var slno = urlParams.get('id');
+ 	var host, protocol, port,urlAdd;
+ 		host = window.location.hostname;
+ 		port = window.location.port;
+ 		protocol = window.location.protocol;
+ 		urlAdd=protocol+"//"+host+":"+port;
+ 	if(slno) {
+ 		fetch(urlAdd+'/students/read/'+slno).then(
+ 			response => {
+ 				return response.json();
+ 			})
+ 		.then(student => {
+ 			document.getElementById("fn").value=student.fname;
+ 			document.getElementById("mn").value=student.mname;
+ 			document.getElementById("ln").value=student.lname;
+ 			document.getElementById("roll").value=student.rollNo;
+ 			document.getElementById("em").value=student.email;
+ 			document.getElementById("sem").value=student.sem;
+ 			document.getElementById("dept").value=student.dept;
+ 			document.getElementById("prn").value=student.prn;
+ 			gender=document.getElementsByName("gender");
+ 			for(var  i=0;i<gender.length;i++)
+ 			{
+ 				if(gender[i].value === student.gender) {
+ 					gender[i].checked = true;
+ 					break;
+ 				}
+
+ 			}
+ 		});
+ 	}
+
+
+
+ 	function createOnSumbmit() {
+ 		var fn,mn,ln,gen,gender,em,prn,roll,sem,dept,url;
+ 		fn=document.getElementById("fn").value;
+ 		mn=document.getElementById("mn").value;
+
+ 		ln=document.getElementById("ln").value;
+
+ 		gender=document.getElementsByName("gender");
+ 		for(var  i=0;i<gender.length;i++)
+ 		{
+ 			if(gender[i].checked)
+ 			{
+ 				gen=gender[i].value;
+ 				break;
+ 			}
+ 		}
+
+ 		roll=document.getElementById("roll").value;
+
+ 		em=document.getElementById("em").value;
+
+ 		sem=document.getElementById("sem").value;
+
+ 		dept=document.getElementById("dept").value;
+ 		prn=document.getElementById("prn").value;
+
+
+
+ 		var queryString = window.location.search;
+ 		var urlParams = new URLSearchParams(queryString);
+ 		var slno = urlParams.get('id');
+ 		console.log(slno);
+ 		if(slno)
+ 		{
+ 			url=urlAdd+'/students/edit';
+ 		}
+ 		else{
+ 			url=urlAdd+'/students/write';
+ 			slno=0;
+ 		}
+ 		var methodBody="{\"slno\":"+slno+",\"rollNo\":"+ roll+",\"prn\": "+prn+",\"fname\": \""+fn+"\",\"mname\":\""+mn+"\",\"lname\":\""+ln+"\",\"email\":\""+em+"\",\"gender\":\""+gen+"\",\"sem\":\""+sem+"\",\"dept\": \""+dept+"\"}";
+ 		fetch(url, {
+ 			method: 'POST',
+    		body: methodBody, // string or object
+    		headers: {
+    			'Content-Type': 'application/json'
+    		}
+    	})
+ 		.then(
+ 			response => {
+
+ 				console.log(response);
+ 				return response.json();
+ 			});
+ 	}
+
+ </script>
+ </html>
+
+

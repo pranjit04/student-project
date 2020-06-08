@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html >
+<head>
+   <title>table</title>
+   <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body>
+   <header>
+      <div class="main";> <!--class nu-->
+         <div class="logo">
+            <img src="logo2.png">
+         </div>
+         <ul>
+            <li ><a href="index.html">Home</a></li> 
+            <li><a href="student.html">Create</a></li>
+            <li class="active"><a href="#">View</a></li>
+         </ul>
+      </div>
+   </header>
+   <div class="title">
+
+            <h2 class="tabletitle">STUDENT DETAILS</h2>  
+
+
+      <table class="content-table" id="mytable" border="1">
+         <tr>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Roll No</th>
+            <th>PRN</th>
+            <th>Department</th>
+            <th>Semister</th>
+            <th>Action</th>
+         </tr>
+
+      </table>
+   </div>
+</body>
+<script type="text/javascript">
+   var table,tablelength,newrow,fn,mn,ln,gen,prn,rol,em,sem,dept,actn;
+   table=document.getElementById("mytable");
+   var host, protocol, port,urlAdd;
+      host = window.location.hostname;
+      port = window.location.port;
+      protocol = window.location.protocol;
+      urlAdd=protocol+"//"+host+":"+port;
+
+
+   fetch(urlAdd+'/students/read/all').then(
+      response => {
+         return response.json();
+      })
+   .then(students => {
+   //console.log(students);
+
+
+   for(var i=0;i<students.length;i++)
+   {
+      tablelength=table.rows.length;//get the length of the table
+      newrow=table.insertRow(tablelength);
+      fn=newrow.insertCell(0);
+      fn.innerHTML=students[i].fname;
+      mn=newrow.insertCell(1);
+      mn.innerHTML=students[i].mname;
+      ln=newrow.insertCell(2);
+      ln.innerHTML=students[i].lname;
+      em=newrow.insertCell(3);
+      em.innerHTML=students[i].email;
+      gen=newrow.insertCell(4);
+      gen.innerHTML=students[i].gender;
+      rol=newrow.insertCell(5);
+      rol.innerHTML=students[i].rollNo;
+      prn=newrow.insertCell(6);
+      prn.innerHTML=students[i].prn;
+      dept=newrow.insertCell(7);
+      dept.innerHTML=students[i].dept;
+      sem=newrow.insertCell(8);
+      sem.innerHTML=students[i].sem;
+      actn=newrow.insertCell(9);
+      actn.innerHTML="<a href=\"student.html?id="+students[i].slno+"\">EDIT</a>";
+      
+
+   }
+
+
+
+});
+
+
+
+</script>
+</html>
