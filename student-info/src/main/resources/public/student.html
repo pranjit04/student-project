@@ -6,9 +6,9 @@
  </head>
  <body>
  	<header>
- 		<div class="main";> <!--class nu-->
+ 		<div class="main">
  			<div class="logo">
- 				<img src="logo2.png">
+ 				<a href="https://www.techvariable.com"><img src="logo2.png"></a>
  			</div>
  			<ul>
  				<li ><a href="index.html">Home</a></li> <!-- jate blg page k link nkore # -->
@@ -22,7 +22,7 @@
  	<h1> STUDENT REGISTRATION FORM</h1>
 
  	<div id="regform">
- 		<form onsubmit="createOnSumbmit()">
+ 		<form action="success.html" onsubmit="createOnSumbmit()">
  			<div>
  				<br>
  				<label for="first-name">First Name:</label><br>
@@ -38,7 +38,7 @@
  			<div>
  				
  				<label for="gender">Male</label>
- 				<input id="gender" type="radio" name="gender" value="male">
+ 				<input id="gender" type="radio" name="gender" value="male" required>
  				<label for="gender">Female</label>
  				<input id="gender" type="radio" name="gender" value="female">
  				<label for="gender">Other</label>
@@ -54,13 +54,13 @@
  			<br>
  			<div>
  				<label for="email">Email:</label><br>
- 				<input id="em" class ="name left-margin" type="name" name="email" placeholder="abc@email.com"><br>
+ 				<input id="em" class ="name left-margin" type="name" name="email" placeholder="abc@email.com" required><br>
  			</div>
  			<br>
  			<div>
  				<label for="dept">Department:</label>
- 				<select id="dept" class="desem"  name="dept">
- 					<option value="0">select</option>
+ 				<select id="dept" class="desem"  name="dept" required>
+ 					<option value="">select</option>
  					<option value="Informaton Technology">Informaton Technology</option>
  					<option value="Electronics and Telecommunication">Electronics and Telecommunication</option>
  					<option value="Electronics">Electronics</option>
@@ -73,8 +73,8 @@
  				<br>
  				<br>
  				<label for="sem">Semister:</label>
- 				<select id="sem" class="desem"  name="sem">
- 					<option value="0">select</option>
+ 				<select id="sem" class="desem"  name="sem" required>
+ 					<option value="">select</option>
  					<option value="I">I</option>
  					<option value="II">II</option>
  					<option value="III">III</option>
